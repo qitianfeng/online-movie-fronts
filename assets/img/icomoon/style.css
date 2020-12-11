@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "icomoon";
+  src: url("fonts/icomoon.eot?npakb9");
+  src: url("fonts/icomoon.eot?npakb9#iefix") format("embedded-opentype"),
+    url("fonts/icomoon.ttf?npakb9") format("truetype"),
+    url("fonts/icomoon.woff?npakb9") format("woff"),
+    url("fonts/icomoon.svg?npakb9#icomoon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "icomoon" !important;
+
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-touxiang:before {
+  content: "\e909";
+}
+.icon-secret :before {
+  content: "\e904";
+}
+.icon-sina-weibo:before {
+  content: "\e900";
+}
+.icon-wechat:before {
+  content: "\e901";
+}
