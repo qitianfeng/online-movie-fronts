@@ -41,7 +41,7 @@
                 v-bind:key="index"
                 :class="{ active: oneIndex == index }"
               >
-                <ul class="clearfix">
+                <ul>
                   <li>
                     <a
                       :title="specvalue"
@@ -69,8 +69,13 @@
           <section class="fl">
             <ol class="js-tap clearfix">
               <li :class="{ 'current bg-orange': buyCountSort != '' }">
-                <a title="销量" :href="url">
-                  销量
+                <a
+                  title="评分"
+                  :href="
+                    url + '&' + 'sortField' + '=' + 'sorce&' + 'sortRule=DESC'
+                  "
+                >
+                  评分
                   <span :class="{ hide: buyCountSort == '' }">↓</span>
                 </a>
               </li>
@@ -84,7 +89,12 @@
                 <a
                   title="价格"
                   :href="
-                    url + '&' + 'sortField' + '=' + 'price&' + 'sortRule=DESC'
+                    url +
+                    '&' +
+                    'sortFieldPrice' +
+                    '=' +
+                    'price&' +
+                    'sortPriceRule=DESC'
                   "
                 >
                   价格&nbsp;
@@ -108,11 +118,11 @@
 
           <!-- /无数据提示 结束-->
 
-          <article class="comm-course-list">
+          <article class="comm-movie-list">
             <ul class="of" id="bna">
               <li v-for="item in result.rows" :key="item.movieId">
                 <div class="cc-l-wrap">
-                  <section class="course-img">
+                  <section class="movie-img">
                     <img
                       :src="item.poster"
                       class="img-responsive"
@@ -121,8 +131,8 @@
 
                     <div class="cc-mask">
                       <a
-                        :href="'/movie/' + item.movieId"
-                        title="开始观看"
+                        v-on:click="judge(item.movieId)"
+                        title="观看"
                         class="comm-btn c-btn-1"
                         >开始观看</a
                       >
@@ -131,12 +141,11 @@
 
                   <h class="hLh txtOf mt">
                     <a
-                      v-html="item.title"
-                      :href="'/movie/' + item.movieId"
+                      v-on:click="judge(movie.movieId)"
                       title="item.title"
-                      class="course-title fsize c-"
-                      >{{ item.title }}</a
-                    >
+                      class="movie-title fsize18 c-333"
+                      v-html="item.title"
+                    ></a>
                   </h>
 
                   <section class="mt hLh of">
@@ -253,6 +262,20 @@ export default {
     this.searchInfo();
   },
   methods: {
+    judge(movieId) {
+      console.log("''''''''''''''''''''''judge'''''''''");
+      var userStr = cookie.get("qi_userInfo_token");
+      console.log(userStr, "=========================");
+      if (userStr === "") {
+        this.$message({
+          message: "请登录后再进行查看！",
+          type: "warning",
+        });
+        window.location.href = "/login";
+      } else {
+        window.location.href = "/movie/" + movieId;
+      }
+    },
     searchInfo() {
       console.log("================ssaa========", this.$route.query.keywords);
       console.log("来搜索啦");
@@ -315,7 +338,7 @@ export default {
     //分页查询
     gotoPage(page) {
       this.page = page;
-      courseApi.getCoursePageList(page, 8, this.searchObj).then((res) => {
+      movieApi.getmoviePageList(page, 8, this.searchObj).then((res) => {
         this.data = res.data.data;
       });
     },

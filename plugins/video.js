@@ -1,6 +1,4 @@
-import Vue from "vue";
-import VideoPlayer from 'vue-video-player'
-import 'vue-video-player/src/custom-theme.css'
+import Video from 'video.js'
 import 'video.js/dist/video-js.css'
+import Vue from "vue";
 Vue.prototype.$video = Video
-Vue.use(VideoPlayer)

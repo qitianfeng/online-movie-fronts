@@ -147,6 +147,7 @@ export default {
     judge(movieId) {
       console.log("''''''''''''''''''''''judge'''''''''");
       var userStr = cookie.get("qi_userInfo_token");
+      console.log(userStr, "=========================");
       if (userStr === "") {
         this.$message({
           message: "请登录后再进行查看！",
